@@ -10,3 +10,4 @@ document.getElementById('layoutSidenav_content').innerHTML += `<footer class="py
     </div>
 </div>
 </footer>`
+
