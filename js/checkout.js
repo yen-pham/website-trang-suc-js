@@ -18,7 +18,7 @@ function loadCart() {
       : ` <li>Subtotal <span id="sub"></span></li>
   <li>Ship <span id="ship">30.000 vnđ</span></li>
   <li>Total <span id="total"></span></li>`;
-  if (cart.length) {
+  if (carts.length) {
     carts.forEach((p, key) => {
       html += `                  <li><samp>${key + 1}.</samp> ${
         p.product.name
