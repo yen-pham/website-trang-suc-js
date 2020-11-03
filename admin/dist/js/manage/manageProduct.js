@@ -3,30 +3,47 @@ var img = '';
 function load() {
     var n = 0;
     var dataProduct = JSON.parse(localStorage.getItem("dataProduct")) || [];
-    if (dataProduct) {
 
-        var row = "";
-        dataProduct.map((product) => {
+    getDataAsync("product").then(dataProduct => {
+        if (dataProduct) {
+            var row = "";
+            Object.keys(dataProduct).map(e => {
+                n++
+                row += `<tr>
+                <td>${n}</td>
+                <td><img style="height: 20%" src=${dataProduct[e].img} /></td>
+                <td>${dataProduct[e].productName}</td>
+                <td>${dataProduct[e].price}</td>
+                <td>${dataProduct[e].category}</td>
+                <td>${dataProduct[e].description}</td>
+                <td>
+                <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#exampleModalLong"  onclick="editProduct('${e}')" >Edit</button> 
+                <button type="button" class="btn btn-danger"  onclick="deleteProduct('${e}')"  >Delete</button>
+                </td></tr>`
+            })
+            document.getElementById('tbody-product').innerHTML = row;
 
-            n++
-            row += `<tr>
-        <td>${n}</td>
-        <td><img style="height: 20%" src=${product.img} /></td>
-        <td>${product.productName}</td>
-        <td>${product.price}</td>
-        <td>${product.category}</td>
-        <td>${product.description}</td>
-        <td>
-        <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#exampleModalLong"  onclick="editProduct('${product.idProduct}')" >Edit</button> 
-        <button type="button" class="btn btn-secondary"  onclick="deleteProduct('${product.idProduct}')"  >Delete</button>
-        </td></tr>`
-        });
+        }
 
-        document.getElementById('tbody-product').innerHTML = row;
-    }
-}
+        console.log(dataProduct);
 
-{/* */ }
+
+    })
+
+
+    getDataAsync("category").then(dataCategory => {
+        if (dataCategory) {
+            var row = "";
+            Object.keys(dataCategory).map(e => {
+
+                row += `<option value="${e}-${dataCategory[e].categoryName}">${dataCategory[e].categoryName}</option>`
+            });
+
+            document.getElementById('selectCategories').innerHTML = row;
+
+        }
+    })
+};
 function editProduct(id) {
     var dataProduct = JSON.parse(localStorage.getItem("dataProduct")) || [];
     dataProduct.map(e => {
@@ -44,10 +61,19 @@ function editProduct(id) {
 
 }
 function deleteProduct(id) {
+
     var dataProduct = JSON.parse(localStorage.getItem("dataProduct")) || [];
 
-    // dataProduct.filter(item => item.idProduct !== id);
-    alert(id)
+    for (var i = 0; i < dataProduct.length; i++) {
+        if (dataProduct[i].idProduct == id) { // nếu là sinh viên cần xóa
+            dataProduct.splice(i, 1); // thì xóa
+        }
+    }
+    // console.log(id);
+    // // dataProduct.filter(item => item.idProduct !== id);
+    // dataProduct.splice(id, 1);
+    localStorage.setItem("dataProduct", JSON.stringify(dataProduct));
+    load();
 
 }
 function chonFile(input) {
@@ -69,7 +95,7 @@ function createProduct() {
 
     var inputPrice = document.getElementById('inputPrice').value;
     var inputDescription = document.getElementById('inputDescription').value;
-    var inputCategory = document.getElementById('inputCategory').value;
+    var inputCategory = document.getElementById('selectCategories').value;
     var idProduct = new Date().valueOf();
     var product = {
         idProduct: edit_index == -1 ? idProduct : edit_index,
@@ -83,19 +109,15 @@ function createProduct() {
     if (edit_index == -1) {
 
 
-        dataProduct.push(product);
+        dbRef.ref().child('product').push(product);
 
 
     }
     else {
-        let index = dataProduct.findIndex(p => p.idProduct == edit_index)
-        dataProduct[index] = product;
+        
 
     }
     document.getElementById("form-create-product").reset();
-
-
-    localStorage.setItem("dataProduct", JSON.stringify(dataProduct));
     load();
 }
 function cancel() {
