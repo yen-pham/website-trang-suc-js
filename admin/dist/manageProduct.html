@@ -13,6 +13,7 @@
         crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
         crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body class="sb-nav-fixed" onload="load()">
@@ -102,6 +103,7 @@
                             </div>
                         </div>
                     </div>
+                    
 
                     <div class="card mb-4">
                         <div class="card-header">
@@ -146,6 +148,19 @@
             <script src="js/footer.js"></script>
         </div>
     </div>
+    <div id="btn-group">
+        <button id="back-to-top-btn">
+
+    </button>
+    <button id="back-to-bottom-btn" onclick="scrollSmoothToBottom()">
+
+    </button>
+    </div>
+    
+
+    <button id="a" onclick="alert(`ahihi`)" disabled>a</button>
+    
+    <script src="js/manage/scrollButton.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
   <script type="text/javascript" src="./firebaseConnect.js"></script>
   

@@ -5,15 +5,15 @@ var image = '';
 function load() {
     getDataAsync("category").then(dataCategory => {
 
-        var n = 0;
+        console.log(dataCategory);
+
         if (dataCategory) {
             var row = "";
-            Object.keys(dataCategory).map(e => {
-                n++;
+            Object.keys(dataCategory).map((e, key) => {
+
                 row += `<tr>
-                <td>${n}</td>
+                <td>${key+1}</td>
                 <td>${dataCategory[e].categoryName}</td>
-                <td>${dataCategory[e].description}</td>
                 <td>
                     <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#exampleModalLong"  onclick="editCategories('${e}')" >Edit</button> 
                     <button type="button" class="btn btn-danger"  onclick="deleteCategories('${e}')"  >Delete</button>
@@ -29,6 +29,10 @@ function load() {
 
 
 }
+function deleteCategories(id) {
+    dbRef.ref('category/' + id).remove();
+    load();
+}
 function editCategories(id) {
 
     getDataAsync("category").then(dataCategory => {
@@ -36,7 +40,6 @@ function editCategories(id) {
             if (e === id) {
                 edit_index = e;
                 document.getElementById('inputCategoryName').value = dataCategory[e].categoryName;
-                document.getElementById('inputDescription').value = dataCategory[e].description;
                 //console.log(dataCategory[e]);
             }
         })
@@ -46,18 +49,17 @@ function editCategories(id) {
 
 function createCategory() {
     var inputCategoryName = document.getElementById('inputCategoryName').value;
-    var inputDescription = document.getElementById('inputDescription').value;
 
     var category = {
-        categoryName: inputCategoryName,
-        description: inputDescription
+        categoryName: inputCategoryName
     }
 
     if(edit_index == -1) {
         dbRef.ref().child('category').push(category);
     }
     else {
-
+        dbRef.ref('category/' + edit_index).set(category);
+        edit_index=-1;
     }
 
     document.getElementById("form-create-category").reset();

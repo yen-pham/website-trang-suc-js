@@ -1,20 +1,26 @@
 var edit_index = -1;
 var img = '';
 function load() {
-    var n = 0;
-    var dataProduct = JSON.parse(localStorage.getItem("dataProduct")) || [];
 
-    getDataAsync("product").then(dataProduct => {
+    getDataAsync("").then(data => {
+        let dataProduct = data.products;
+        let dataCategory = data.category;
+
         if (dataProduct) {
+
+            //console.log(dataProduct);
             var row = "";
-            Object.keys(dataProduct).map(e => {
-                n++
+
+
+
+            Object.keys(dataProduct).map((e, key) => {
+                
                 row += `<tr>
-                <td>${n}</td>
-                <td><img style="height: 20%" src=${dataProduct[e].img} /></td>
-                <td>${dataProduct[e].productName}</td>
+                <td>${key+1}</td>
+                <td><img style="height: 20%" src=${dataProduct[e].image} /></td>
+                <td>${dataProduct[e].name}</td>
                 <td>${dataProduct[e].price}</td>
-                <td>${dataProduct[e].category}</td>
+                <td>${dataCategory[dataProduct[e].categoryId].categoryName}</td>
                 <td>${dataProduct[e].description}</td>
                 <td>
                 <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#exampleModalLong"  onclick="editProduct('${e}')" >Edit</button> 
@@ -25,18 +31,18 @@ function load() {
 
         }
 
-        console.log(dataProduct);
+        // console.log(dataProduct);
 
 
     })
-
+    //${dataCategory[dataProduct[e].categoryId].categoryName}
 
     getDataAsync("category").then(dataCategory => {
         if (dataCategory) {
             var row = "";
             Object.keys(dataCategory).map(e => {
 
-                row += `<option value="${e}-${dataCategory[e].categoryName}">${dataCategory[e].categoryName}</option>`
+                row += `<option value="${e}">${dataCategory[e].categoryName}</option>`
             });
 
             document.getElementById('selectCategories').innerHTML = row;
@@ -45,34 +51,25 @@ function load() {
     })
 };
 function editProduct(id) {
-    var dataProduct = JSON.parse(localStorage.getItem("dataProduct")) || [];
-    dataProduct.map(e => {
-        if (e.idProduct == id) {
+    getDataAsync(`products/${id}`).then(data => {
+        //console.log(data);
+        if (data) {
+            //console.log(data.image);
             edit_index = id;
-            document.getElementById('inputProductName').value = e.productName
-            document.getElementById('inputPrice').value = e.price;
-            document.getElementById('inputDescription').value = e.description;
-            document.getElementById('inputCategory').value = e.category;
-            img = e.img;
-            document.getElementById("displayImage").innerHTML = `<img style="height: 20%" src=${e.img} />`;
-
+            document.getElementById('inputProductName').value = data.name;
+            document.getElementById('inputPrice').value = data.price;
+            document.getElementById('inputDescription').value = data.description;
+            document.getElementById('selectCategories').value = data.categoryId;
+            img = data.image;
+            document.getElementById("displayImage").innerHTML = `<img style="width: 20%" src=${data.image} />`;
+            //console.log(document.getElementById("displayImage"));
         }
     })
 
 }
 function deleteProduct(id) {
 
-    var dataProduct = JSON.parse(localStorage.getItem("dataProduct")) || [];
-
-    for (var i = 0; i < dataProduct.length; i++) {
-        if (dataProduct[i].idProduct == id) { // nếu là sinh viên cần xóa
-            dataProduct.splice(i, 1); // thì xóa
-        }
-    }
-    // console.log(id);
-    // // dataProduct.filter(item => item.idProduct !== id);
-    // dataProduct.splice(id, 1);
-    localStorage.setItem("dataProduct", JSON.stringify(dataProduct));
+    dbRef.ref('products/' + id).remove();
     load();
 
 }
@@ -82,7 +79,7 @@ function chonFile(input) {
         reader.onload = function (e) {
             //console.log(e.target.result)
             img = e.target.result;
-            document.getElementById("displayImage").innerHTML = `<img style="height: 20%" src=${img} />`;
+            document.getElementById("displayImage").innerHTML = `<img style="width: 20%" src=${img} />`;
         }
 
         reader.readAsDataURL(input.files[0]); // convert to base64 string
@@ -96,30 +93,47 @@ function createProduct() {
     var inputPrice = document.getElementById('inputPrice').value;
     var inputDescription = document.getElementById('inputDescription').value;
     var inputCategory = document.getElementById('selectCategories').value;
-    var idProduct = new Date().valueOf();
     var product = {
-        idProduct: edit_index == -1 ? idProduct : edit_index,
-        productName: inputProductName,
+        name: inputProductName,
         price: inputPrice,
         description: inputDescription,
-        category: inputCategory,
-        img: img
+        categoryId: inputCategory,
+        image: img
     }
-    var dataProduct = JSON.parse(localStorage.getItem("dataProduct")) || [];
     if (edit_index == -1) {
 
 
-        dbRef.ref().child('product').push(product);
+        dbRef.ref().child('products').push(product,function (error) {
+            if (error) {
+                console.log(error);
+            } else {
+                load();
+            }
+        });
 
 
     }
     else {
+
+        dbRef.ref('products/' + edit_index).set(product,function (error) {
+            if (error) {
+                console.log(error);
+            } else {
+                edit_index=-1;
+                load();
+            }
+        });
+
         
 
+
     }
+    //   setTimeout( load(), 3000);
+
     document.getElementById("form-create-product").reset();
-    load();
+    document.getElementById("displayImage").innerHTML = "";
 }
 function cancel() {
     document.getElementById("form-create-product").reset();
+    document.getElementById("displayImage").innerHTML = "";
 }

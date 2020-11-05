@@ -15,6 +15,71 @@
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark" id="navbar">
             <script src="js/navbar.js" ></script>
         </nav>
+<!-- xem thoong tin khasch hafng -->
+        <div class="modal fade" id="userCustomerDetails" tabindex="-1" role="dialog" aria-labelledby="userCustomerDetails"
+        aria-hidden="true">
+        <div class="modal-dialog bd-example-modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">CUSTOMER DETAIL</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="showCustomerContent">
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        >Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- xem chi tiết hóa đơn -->
+    <div class="modal fade" id="userProductDetails" tabindex="-1" role="dialog" aria-labelledby="userProductDetails"
+        aria-hidden="true">
+        <div class="modal-dialog bd-example-modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">ORDER DETAIL</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="showOrderDetailContent">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="small mb-1" for="inputCategory">Product</label>
+                            <div>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">No</th>
+                                            <th scope="col">Image</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Quantity</th>
+                                            <th scope="col">Subtotal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="showProductOrder" >
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        >Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
                 
@@ -41,25 +106,27 @@
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
-                                                <th>Name</th>
-                                                <th>Position</th>
-                                                <th>Office</th>
-                                                <th>Age</th>
-                                                <th>Start date</th>
-                                                <th>Salary</th>
+                                                <th>No</th>
+                                                <th>OrderId</th>
+                                                <th>Customer</th>
+                                                <th>Order details</th>
+                                                <th>Thông tin giao nhận</th>
+                                                <th>Tổng tiền</th>
+                                                <th>Options</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
-                                                <th>Name</th>
-                                                <th>Position</th>
-                                                <th>Office</th>
-                                                <th>Age</th>
-                                                <th>Start date</th>
-                                                <th>Salary</th>
+                                                <th>No</th>
+                                                <th>OrderId</th>
+                                                <th>Customer</th>
+                                                <th>Order details</th>
+                                                <th>Thông tin giao nhận</th>
+                                                <th>Tổng tiền</th>
+                                                <th>Options</th>
                                             </tr>
                                         </tfoot>
-                                        <tbody>
+                                        <tbody id="tbody-orders"> 
                                             
                                         </tbody>
                                     </table>

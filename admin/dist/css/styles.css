@@ -10260,3 +10260,124 @@ body {
 .sb-sidenav-light .sb-sidenav-footer {
   background-color: #e9ecef;
 }
+
+
+
+#back-to-top-btn:hover {
+  background-color: #85797a;
+  transition: all .5s linear;
+}
+
+#back-to-top-btn {display: block;
+  border-radius: 50%;
+  position: relative;
+  /* position: fixed; */
+  /* bottom: 6%;
+  right: 1%; */
+  z-index: 9999;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background-color: #bbb;
+  color: #fff;
+  cursor: pointer;
+  padding: 15px;
+  height: 50px;
+  width: 50px;
+  transition: all .5s linear;
+  
+
+
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  transition-property: background-color, color;
+}
+#back-to-top-btn:hover {
+background-color: #b22830;
+color: #fff; 
+transition: all .5s linear; 
+}
+#back-to-top-btn::before {
+  content: "\f106";
+  font-family: fontawesome;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all .5s linear;
+}
+@media(max-width: 992px) {
+  #back-to-top-btn { font-size: 22px; width: 40px; height: 40px; /*bottom: 15px; right: 15px; */
+    transition: all .5s linear;}
+}
+@media(max-width:768px) {
+#back-to-top-btn { font-size: 18px; width: 32px; height: 32px; transition: all .5s linear;}
+}
+
+/* up */
+
+
+#back-to-bottom-btn:hover {
+  background-color: #85797a;
+  transition: all .5s linear;
+}
+
+#back-to-bottom-btn {
+  display: block;
+  position: relative;
+  border-radius: 50%;
+  /* position: fixed;
+  bottom: 1%;
+  right: 1%; */
+  z-index: 9999;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background-color: #bbb;
+  color: #fff;
+  cursor: pointer;
+  padding: 15px;
+  height: 50px;
+  width: 50px;
+  transition: all .5s linear;
+  
+
+
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  transition-property: background-color, color;
+}
+#back-to-bottom-btn:hover {
+background-color: #b22830;
+color: #fff; 
+transition: all .5s linear; 
+}
+#back-to-bottom-btn::before {
+  content: "\f107";
+  font-family: fontawesome;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all .5s linear;
+}
+@media(max-width: 992px) {
+  #back-to-bottom-btn { font-size: 22px; width: 40px; height: 40px; /*bottom: 15px; right: 15px; */
+    transition: all .5s linear;}
+}
+@media(max-width:768px) {
+#back-to-bottom-btn { font-size: 18px; width: 32px; height: 32px; transition: all .5s linear;}
+}
+
+
+
+
+
+
+
+#btn-group {
+  position: fixed;
+  bottom: 1%;
+  right: 1%;
+
+}
