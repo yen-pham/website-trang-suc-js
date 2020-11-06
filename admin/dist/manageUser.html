@@ -30,6 +30,8 @@
             background-clip: padding-box;
         }
     </style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body class="sb-nav-fixed" onload="load()">
@@ -124,6 +126,16 @@
             <script src="js/footer.js"></script>
         </div>
     </div>
+    <div id="btn-group">
+        <button id="back-to-top-btn">
+
+        </button>
+        <button id="back-to-bottom-btn" onclick="scrollSmoothToBottom()">
+
+        </button>
+    </div>
+
+    <script src="js/manage/scrollButton.js"></script>
 
     <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
     <script type="text/javascript" src="./firebaseConnect.js"></script>

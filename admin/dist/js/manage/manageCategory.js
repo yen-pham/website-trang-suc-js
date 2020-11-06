@@ -5,7 +5,7 @@ var image = '';
 function load() {
     getDataAsync("category").then(dataCategory => {
 
-        console.log(dataCategory);
+        //console.log(dataCategory);
 
         if (dataCategory) {
             var row = "";

@@ -1,6 +1,5 @@
 function load() {
     getDataAsync("users").then(dataOrder => {
-        //console.log(dataOrder);
         if (dataOrder) {
             Object.keys(dataOrder).map(e => {
 
@@ -13,7 +12,6 @@ function load() {
 
                         row += `<tr>
                         <td>${key + 1}</td>
-                        <td>${f}</td>
                         <td data-toggle="modal" data-target="#userCustomerDetails" onclick="showCustomer('${e}')" >${dataOrder[e].fullname}</td>
                         <td><button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#userProductDetails" onclick="showOrderDetails('${e}', '${f}')" >Details</button></td>
                         <td>
@@ -26,7 +24,7 @@ function load() {
                             ${formatPrice( `${dataOrder[e].bills[f].total}` )} VNĐ
                         </td>
                         <td>
-                        <button type="button" class="btn btn-danger">Delete</button>
+                        <button type="button" class="btn btn-danger" onclick="deleteOrder('${e}', '${f}')">Delete</button>
                         </td>
                         </tr>`
                     })
@@ -39,12 +37,15 @@ function load() {
 
 
 }
-
+function deleteOrder(e,f) {
+    dbRef.ref(`users/${e}/bills/${f}`).remove();
+    load();
+}
 function formatPrice(price) {
     return new Intl.NumberFormat().format(price);
 }
 function showOrderDetails(e,f) {
-    console.log(e, " , ", f);
+    // console.log(e, " , ", f);
     getDataAsync(`users/${e}/bills/${f}`).then(data => {
         //console.log(data);
         if(data) {

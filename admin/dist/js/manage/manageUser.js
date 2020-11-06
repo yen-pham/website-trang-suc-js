@@ -3,7 +3,7 @@ function load() {
 
     getDataAsync("users").then(dataUser => {
         if (dataUser) {
-            console.log(dataUser);
+            //console.log(dataUser);
             var row = "";
             Object.keys(dataUser).map((e, key) => {
                 row += `<tr>
@@ -20,7 +20,7 @@ function load() {
                 <td>${dataUser[e].username}</td>
                 <td>${dataUser[e].role}</td>
                 <td>
-                <button type="button" class="btn btn-danger">Delete</button>
+                <button type="button" class="btn btn-danger"  onclick="deleteUser('${e}')">Delete</button>
                 </td>
                 </tr>`
             });
@@ -35,6 +35,13 @@ function load() {
 
 
 }
+
+function deleteUser(e) {
+    //console.log(e);
+
+    dbRef.ref('users/' + e).remove();
+    load();
+}
 function formatPrice(price) {
     return new Intl.NumberFormat().format(price);
 }
@@ -46,10 +53,14 @@ function showBills(e) {
         var row = `<h5 class="modal-title" id="exampleModalLongTitle">CUSTOMER: <strong>${data.fullname}</strong></h5>`;
         if (dataBill) {
             //console.log(dataBill);
+            let dataBills = Object.values(dataBill);
+            
 
-            Object.keys(dataBill).map(e => {
+           dataBills.map(e => {
 
                 //console.log(dataBill[e].total);
+                let array = Object.values(e.products);
+                console.log(array);
                 
 
                 row += `
@@ -58,24 +69,24 @@ function showBills(e) {
                 <div class="form-row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label class="small mb-1">Name: <strong>${dataBill[e].informationBill.fullname}</strong></label>
+                            <label class="small mb-1">Name: <strong>${e.informationBill.fullname}</strong></label>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="inputImage" class="small mb-1">Phone: <strong>${dataBill[e].informationBill.phone}</strong></label>
+                            <label for="inputImage" class="small mb-1">Phone: <strong>${e.informationBill.phone}</strong></label>
 
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label class="small mb-1" for="inputLastName">Address: <strong>${dataBill[e].informationBill.address}</strong>
+                            <label class="small mb-1" for="inputLastName">Address: <strong>${e.informationBill.address}</strong>
                               </label>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label class="small mb-1" for="inputLastName">Time: <strong>31/10/2020 4:56 PM</strong></label>
+                            <label class="small mb-1" for="inputLastName">Time: <strong>${e.informationBill.time}</strong></label>
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -93,8 +104,9 @@ function showBills(e) {
                                         </tr>
                                     </thead>
                                     <tbody id="showProductOrder" >
-                                    ${dataBill[e].products.map((value, key) => {
-                                            row+=`<tr>
+                                    ${array.map((value, key) => {
+                                        console.log(value);
+                                            `<tr>
                                         <td>${key+1}</td>
                                         <td><img src=${value.product.image} style="width: 20%" /></td>
                                         <td>${value.product.name}</td>
@@ -113,7 +125,7 @@ function showBills(e) {
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label class="small mb-1">Total: <strong>${formatPrice(`${dataBill[e].total}`)}
+                            <label class="small mb-1">Total: <strong>${formatPrice(`${e.total}`)}
                                     VNĐ</strong></label>
                         </div>
                     </div>
