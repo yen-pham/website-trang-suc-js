@@ -29,23 +29,14 @@ document.getElementById("layoutSidenav_nav").innerHTML=`
         </a>
         <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-parent="#sidenavAccordion">
             <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                    Error
-                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                <a class="nav-link collapsed" href="Login.html">
+                    Login
                 </a>
-                <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
-                    <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="404.html">404 Page</a>
-                    </nav>
-                </div>
+                <a class="nav-link collapsed" href="404.html">
+                    404 Page
+                </a>
             </nav>
-        </div>
-        <div class="sb-sidenav-menu-heading">Extensions</div>
-        <a class="nav-link" href="login.html">
-            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-            Login
-        </a>
-        
+        </div>        
     </div>
 </div>
 

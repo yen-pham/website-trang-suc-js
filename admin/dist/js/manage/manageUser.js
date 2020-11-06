@@ -103,10 +103,10 @@ function showBills(e) {
                                             <th scope="col">Subtotal</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="showProductOrder" >
-                                    ${array.map((value, key) => {
+                                    <tbody id="showProductOrder" >`;
+                                    array.map((value, key) => {
                                         console.log(value);
-                                            `<tr>
+                                            row+=`<tr>
                                         <td>${key+1}</td>
                                         <td><img src=${value.product.image} style="width: 20%" /></td>
                                         <td>${value.product.name}</td>
@@ -114,8 +114,8 @@ function showBills(e) {
                                         <td>  ${formatPrice( `${value.total}` )} VNĐ
                                         </td>
                                         `})
-                                    }
-                                </tbody>
+                                    
+                                row += `</tbody>
                                 </table>
 
                             </div>

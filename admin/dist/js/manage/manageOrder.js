@@ -1,4 +1,5 @@
 function load() {
+
     getDataAsync("users").then(dataOrder => {
         if (dataOrder) {
             Object.keys(dataOrder).map(e => {
@@ -21,7 +22,7 @@ function load() {
                             <p>Create at: <strong>${dataOrder[e].bills[f].informationBill.createAt}</strong></p>
                         </td>
                         <td> 
-                            ${formatPrice( `${dataOrder[e].bills[f].total}` )} VNĐ
+                            ${formatPrice(`${dataOrder[e].bills[f].total}`)} VNĐ
                         </td>
                         <td>
                         <button type="button" class="btn btn-danger" onclick="deleteOrder('${e}', '${f}')">Delete</button>
@@ -37,28 +38,28 @@ function load() {
 
 
 }
-function deleteOrder(e,f) {
+function deleteOrder(e, f) {
     dbRef.ref(`users/${e}/bills/${f}`).remove();
     load();
 }
 function formatPrice(price) {
     return new Intl.NumberFormat().format(price);
 }
-function showOrderDetails(e,f) {
+function showOrderDetails(e, f) {
     // console.log(e, " , ", f);
     getDataAsync(`users/${e}/bills/${f}`).then(data => {
         //console.log(data);
-        if(data) {
+        if (data) {
             let dataProducts = data.products;
             //console.log(data.products);
-            var row=``;
+            var row = ``;
             dataProducts.map((value, key) => {
-                row+=`<tr>
-                <td>${key+1}</td>
+                row += `<tr>
+                <td>${key + 1}</td>
                 <td><img src=${value.product.image} style="width: 20%" /></td>
                 <td>${value.product.name}</td>
                 <td>${value.quantity}</td>
-                <td>  ${formatPrice( `${value.total}` )} VNĐ
+                <td>  ${formatPrice(`${value.total}`)} VNĐ
                 </td>
                 `
             })
