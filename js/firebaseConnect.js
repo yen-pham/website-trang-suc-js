@@ -12,19 +12,19 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 // var data = firebase.database();
 const dbRef = firebase.database();
-var products = []
-dbRef.ref("products").on("value", (sp) => {
-  sp.val().forEach(pro => {
-    products.push(pro);
-  });
-});
-var loading = true;
-var category = []
-dbRef.ref("category").on("value", (sp) => {
-  sp.val().forEach(pro => {
-    category.push(pro);
-  });
-});
+// var products = []
+// dbRef.ref("products").on("value", (sp) => {
+//   sp.val().forEach(pro => {
+//     products.push(pro);
+//   });
+// });
+// var loading = true;
+// var category = []
+// dbRef.ref("category").on("value", (sp) => {
+//   sp.val().forEach(pro => {
+//     category.push(pro);
+//   });
+// });
 async function getDataAsync(name) {
   let response = await fetch(`https://notereactfedu-3cb48.firebaseio.com/${name}.json`);
   let data = await response.json()

@@ -1,3 +1,12 @@
+function changeArray(data) {
+  let result=[];
+  Object.keys(data).map((key)=>{
+    data[key].id=key;
+    result.push(data[key]);
+  })
+  return result
+}
+
 var cart = localStorage.getItem('cart')? JSON.parse(localStorage.getItem('cart')):[]
 function numberWithCommas(x) {
   x = x.toString();
@@ -8,10 +17,10 @@ function numberWithCommas(x) {
 }
 function showpro(category,products) {
   var html="";
-  category.map((value,key)=>{
-    html+=`<h3 id="${value.categoryId}">${value.categoryName}</h3>`;
-    for (i in products) {
-      if(products[i].categoryId==value.categoryId){
+  Object.keys(category).map(cate=>{
+    html+=`<h3 id="${cate}">${category[cate].categoryName}</h3>`;
+    Object.keys(products).map((i)=>{
+    if(products[i].categoryId==cate){
         var n=i ;
       n++;
       html += `
@@ -21,18 +30,18 @@ function showpro(category,products) {
       <div class="ih-item square effect13 left_to_right"><a>
           <div class="img"><img src=${products[i].image} alt="img"></div>
           <div class="info">
-            <h3>${products[i].name}</h3>
+            <h3 onClick="productDetail('${i}')">${products[i].name}</h3>
             <h5>Giá: ${numberWithCommas(products[i].price)} vnđ</h5>
-            <button type="button"  class="btn btn-outline-light" onclick="addCart(${products[i].id})"><i class="fa fa-cart-plus" aria-hidden="true"></i> Thêm vào giỏ hàng</button>
+            <button type="button"  class="btn btn-outline-light" onclick="addCart('${i}')"><i class="fa fa-cart-plus" aria-hidden="true"></i> Thêm vào giỏ hàng</button>
           </div></a></div>
       <!-- end normal -->
    
     </div>
-      `
+      `;
       }
       
-    }
-  })
+    })
+  });
   
   
   document.getElementById('show').innerHTML= html;
@@ -40,14 +49,14 @@ function showpro(category,products) {
 }
 function showcate(category) {
   var htmlCate="";
-  for (i in category) {
+  Object.keys(category).map(i=>{
     var n=i ;
     n++;
     htmlCate +=`
-    <li class="list-group-item cateItem"> <a href="#${category[i].categoryId}"> <i class="fa fa-angle-right" aria-hidden="true"></i>
+    <li class="list-group-item cateItem"> <a href="#${i}"> <i class="fa fa-angle-right" aria-hidden="true"></i>
     ${category[i].categoryName}</a></li>
     `
-}
+})
 document.getElementById('cateList').innerHTML=htmlCate;
 }
 function show() {
@@ -56,10 +65,13 @@ function show() {
 
 }
 function addCart(proId) {
+  console.log(proId);
   if(localStorage.getItem("user")){
-    let pro= products.filter(p=>p.id==proId)[0];
-
-      console.log(cart.length);
+    getDataAsync('products').then(products=>
+      {
+        let pro= products[proId];
+    let product=changeArray(products);
+    console.log(product);
       if(cart.length>0) {
         let proIndex = cart.findIndex(p=> p.product.id == proId);
         console.log(proIndex);
@@ -77,6 +89,8 @@ function addCart(proId) {
          document.getElementsByClassName("alert")[0].style.display = "none";
       }, 2000);
   }
+      )}
+    
   else {
     alert("bạn cần đăng nhập để mua hàng!!")
     window.location="login.html";
@@ -87,3 +101,7 @@ function addCart(proId) {
 function closeAlert() {
   document.getElementsByClassName("alert")[0].style.display = "none";
 }
+function productDetail(id) {
+  localStorage.setItem("proDetail",id);
+  window.location="product-detail.html"
+    }

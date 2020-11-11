@@ -49,6 +49,7 @@ function load() {
     alert("bạn cần đăng nhập để mua hàng!!");
     window.location = "login.html";
   }
+ 
 }
 
 function checkout() {
@@ -61,13 +62,15 @@ function checkout() {
   let address = document.getElementById("address").value;
   let phone = document.getElementById("phone").value;
   let note = document.getElementById("note").value;
+  let createAt =new Date();
   let total = 30000;
   products.map((p) => (total += p.product.price * p.quantity));
   let bill = {
     products,
-    informationBill: { username, fullname, email, address, phone, note },
+    informationBill: { username, fullname, email, address, phone, note, createAt:createAt.toUTCString() },
     total,
   };
+  console.log(bill.informationBill.creatAt);
   dbRef.ref().child(`users/${key}/bills`).push(bill);
   alert("Cảm ơn bạn đã mua hàng!!!");
   localStorage.removeItem("cart");

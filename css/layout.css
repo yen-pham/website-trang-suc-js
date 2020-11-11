@@ -184,6 +184,8 @@ header .nav {
   background-color: none !important;
   z-index: 999;
   top: 10px;
+  box-shadow: none;
+
 }
 .nav a {
   font-weight: 700;

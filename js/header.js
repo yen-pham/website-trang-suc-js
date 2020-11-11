@@ -2,7 +2,7 @@ var user=localStorage.getItem('user')?JSON.parse(localStorage.getItem('user')):n
 var header = `<nav class="navbar navbar-expand-lg navbar-light nav">
 <div class="collapse navbar-collapse " id="navbarNav">
 <ul class="navbar-nav " id="list-nav">
-    <li class="nav-item active">
+    <li class="nav-item ">
       <a class="nav-link" href="home.html">Home <span class="sr-only">(current)</span></a>
     </li>
     <li class="nav-item">
@@ -12,7 +12,7 @@ var header = `<nav class="navbar navbar-expand-lg navbar-light nav">
       <a class="nav-link" href="#">About Us</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Contact</a>
+      <a class="nav-link" href="contact.html">Contact</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" id="cart" href="cart.html">Cart</a>

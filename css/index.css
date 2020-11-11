@@ -284,4 +284,7 @@ color: red;
   transform: translate(-50%,0);
   width: 1px;
 }
+.ih-item.square.effect13 .info h3 {
+  cursor: pointer;
+}
 

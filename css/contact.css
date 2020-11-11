@@ -1,0 +1,27 @@
+.form-mail{
+  border: 1px solid #e0e0e0;
+  padding: 15px;
+  /* width: 70%; */
+  margin: 0px 15%;
+  background: white;
+  background-image: url(https://us.123rf.com/450wm/trueffelpix/trueffelpix1710/trueffelpix171000008/87918570-stick-figure-with-pen-and-envelope-on-plain-background.jpg?ver=6);  background-size: 20%;
+  background-repeat: no-repeat;
+  background-position-x: 15px;
+  background-position-y: 15px;
+   box-shadow: -6px 8px 6px 0px black;
+}
+.form {
+  padding: 100px 0;
+
+}
+.md-form {
+  position: relative;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.mb-0, .my-0 {
+  margin-bottom: 0 !important;
+}
+
+
+
