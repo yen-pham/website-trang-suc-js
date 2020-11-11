@@ -7,6 +7,7 @@ function load() {
         let dataCategory = data.category;
 
         if (dataProduct) {
+            console.log(dataProduct);
 
             //console.log(dataProduct);
             var row = "";
@@ -14,9 +15,9 @@ function load() {
 
 
             Object.keys(dataProduct).map((e, key) => {
-                
+
                 row += `<tr>
-                <td>${key+1}</td>
+                <td>${key + 1}</td>
                 <td><img style="height: 20%" src=${dataProduct[e].image} /></td>
                 <td>${dataProduct[e].name}</td>
                 <td>${dataProduct[e].price}</td>
@@ -66,11 +67,12 @@ function editProduct(id) {
         }
     })
 
+
 }
 function deleteProduct(id) {
 
     dbRef.ref('products/' + id).remove();
-    load();
+    location.reload();
 
 }
 function chonFile(input) {
@@ -103,32 +105,21 @@ function createProduct() {
     if (edit_index == -1) {
 
 
-        dbRef.ref().child('products').push(product,function (error) {
-            if (error) {
-                console.log(error);
-            } else {
-                load();
-            }
-        });
+        dbRef.ref().child('products').push(product);
 
 
     }
     else {
 
-        dbRef.ref('products/' + edit_index).set(product,function (error) {
-            if (error) {
-                console.log(error);
-            } else {
-                edit_index=-1;
-                load();
-            }
-        });
+        dbRef.ref('products/' + edit_index).set(product);
+        edit_index = -1;
 
-        
+
 
 
     }
     //   setTimeout( load(), 3000);
+    location.reload();
 
     document.getElementById("form-create-product").reset();
     document.getElementById("displayImage").innerHTML = "";

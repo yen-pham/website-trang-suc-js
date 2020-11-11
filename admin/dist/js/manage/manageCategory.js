@@ -12,10 +12,11 @@ function load() {
             Object.keys(dataCategory).map((e, key) => {
 
                 row += `<tr>
-                <td>${key+1}</td>
+                <td>${key + 1}</td>
                 <td>${dataCategory[e].categoryName}</td>
                 <td>
-                    <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#exampleModalLong"  onclick="editCategories('${e}')" >Edit</button> 
+                    <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#exampleModalLong"
+                      onclick="editCategories('${e}')" >Edit</button> 
                     <button type="button" class="btn btn-danger"  onclick="deleteCategories('${e}')"  >Delete</button>
                 </td>
                 </tr>`
@@ -31,18 +32,16 @@ function load() {
 }
 function deleteCategories(id) {
     dbRef.ref('category/' + id).remove();
-    load();
+    location.reload();
 }
 function editCategories(id) {
 
-    getDataAsync("category").then(dataCategory => {
-        Object.keys(dataCategory).map(e => {
-            if (e === id) {
-                edit_index = e;
-                document.getElementById('inputCategoryName').value = dataCategory[e].categoryName;
-                //console.log(dataCategory[e]);
-            }
-        })
+    getDataAsync(`category/${id}`).then(dataCategory => {
+        console.log(dataCategory);
+        if (dataCategory) {
+            edit_index = id;
+            document.getElementById('inputCategoryName').value = dataCategory.categoryName;
+        }
     })
 }
 
@@ -54,16 +53,16 @@ function createCategory() {
         categoryName: inputCategoryName
     }
 
-    if(edit_index == -1) {
+    if (edit_index == -1) {
         dbRef.ref().child('category').push(category);
     }
     else {
         dbRef.ref('category/' + edit_index).set(category);
-        edit_index=-1;
+        edit_index = -1;
     }
 
     document.getElementById("form-create-category").reset();
-    load();
+    location.reload();
 }
 function cancel() {
     document.getElementById("form-create-category").reset();

@@ -40,7 +40,7 @@ function load() {
 }
 function deleteOrder(e, f) {
     dbRef.ref(`users/${e}/bills/${f}`).remove();
-    load();
+    location.reload();
 }
 function formatPrice(price) {
     return new Intl.NumberFormat().format(price);
