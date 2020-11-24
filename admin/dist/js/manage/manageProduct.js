@@ -92,7 +92,7 @@ function deleteProduct(id, name) {
 
     console.log(name);
 
-    // dbRef.ref('products/' + id).remove();
+    dbRef.ref('products/' + id).remove();
 
     myFunction(`Delete ${name.toUpperCase()} successfully`);
     // location.reload();
