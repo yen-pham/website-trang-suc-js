@@ -38,9 +38,23 @@ function load() {
 
 
 }
+
+function myFunction(string) {
+    var x = document.getElementById("snackbar");
+    x.className = "show";
+    x.innerHTML = string;
+    setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+
+    setTimeout(function() {location.reload()}, 2000)
+
+    // location.reload();
+}
+
+
 function deleteOrder(e, f) {
     dbRef.ref(`users/${e}/bills/${f}`).remove();
-    location.reload();
+
+    myFunction(`Delete bill: ${f} successfully`);
 }
 function formatPrice(price) {
     return new Intl.NumberFormat().format(price);

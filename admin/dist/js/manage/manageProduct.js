@@ -1,5 +1,9 @@
 var edit_index = -1;
 var img = '';
+
+function formatPrice(price) {
+    return new Intl.NumberFormat().format(price);
+}
 function load() {
 
     getDataAsync("").then(data => {
@@ -20,12 +24,12 @@ function load() {
                 <td>${key + 1}</td>
                 <td><img style="height: 20%" src=${dataProduct[e].image} /></td>
                 <td>${dataProduct[e].name}</td>
-                <td>${dataProduct[e].price}</td>
+                <td>${formatPrice(`${dataProduct[e].price}`)} VNĐ</td>
                 <td>${dataCategory[dataProduct[e].categoryId].categoryName}</td>
                 <td>${dataProduct[e].description}</td>
                 <td>
                 <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#exampleModalLong"  onclick="editProduct('${e}')" >Edit</button> 
-                <button type="button" class="btn btn-danger"  onclick="deleteProduct('${e}')"  >Delete</button>
+                <button type="button" class="btn btn-danger" onclick="deleteProduct('${e}', '${dataProduct[e].name}')"  >Delete</button>
                 </td></tr>`
             })
             document.getElementById('tbody-product').innerHTML = row;
@@ -51,6 +55,18 @@ function load() {
         }
     })
 };
+
+function myFunction(string) {
+    var x = document.getElementById("snackbar");
+    x.className = "show";
+    x.innerHTML = string;
+    setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+
+    setTimeout(function() {location.reload()}, 2000)
+
+    // location.reload();
+}
+
 function editProduct(id) {
     getDataAsync(`products/${id}`).then(data => {
         //console.log(data);
@@ -69,11 +85,17 @@ function editProduct(id) {
 
 
 }
-function deleteProduct(id) {
 
-    dbRef.ref('products/' + id).remove();
-    location.reload();
 
+
+function deleteProduct(id, name) {
+
+    console.log(name);
+
+    // dbRef.ref('products/' + id).remove();
+
+    myFunction(`Delete ${name.toUpperCase()} successfully`);
+    // location.reload();
 }
 function chonFile(input) {
     if (input.files && input.files[0]) {
@@ -106,6 +128,7 @@ function createProduct() {
 
 
         dbRef.ref().child('products').push(product);
+        myFunction(`Add ${product.name.toUpperCase()} successfully`)
 
 
     }
@@ -114,12 +137,13 @@ function createProduct() {
         dbRef.ref('products/' + edit_index).set(product);
         edit_index = -1;
 
+        myFunction(`Edit ${product.name.toUpperCase()} successfully`)
 
 
 
     }
     //   setTimeout( load(), 3000);
-    location.reload();
+    // location.reload();
 
     document.getElementById("form-create-product").reset();
     document.getElementById("displayImage").innerHTML = "";

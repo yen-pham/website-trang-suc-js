@@ -20,7 +20,7 @@ function load() {
                 <td>${dataUser[e].username}</td>
                 <td>${dataUser[e].role}</td>
                 <td>
-                <button type="button" class="btn btn-danger"  onclick="deleteUser('${e}')">Delete</button>
+                <button type="button" class="btn btn-danger"  onclick="deleteUser('${e}', '${dataUser[e].fullname}')">Delete</button>
                 </td>
                 </tr>`
             });
@@ -36,14 +36,25 @@ function load() {
 
 }
 
-function deleteUser(e) {
-    //console.log(e);
+function deleteUser(e, name) {
 
     dbRef.ref('users/' + e).remove();
-    location.reload();
+
+    myFunction(`Delete ${name.toUpperCase()} successfully`);
 }
 function formatPrice(price) {
     return new Intl.NumberFormat().format(price);
+}
+
+function myFunction(string) {
+    var x = document.getElementById("snackbar");
+    x.className = "show";
+    x.innerHTML = string;
+    setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+
+    setTimeout(function() {location.reload()}, 2000)
+
+    // location.reload();
 }
 function showBills(e) {
     getDataAsync(`users/${e}`).then(data => {

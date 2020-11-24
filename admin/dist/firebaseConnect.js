@@ -1,19 +1,20 @@
 var firebaseConfig = {
-    apiKey: "AIzaSyBFZ2SXTM82PfF2tTsbYjtBCNB8zpY5hLQ",
-    authDomain: "notereactfedu-3cb48.firebaseapp.com",
-    databaseURL: "https://notereactfedu-3cb48.firebaseio.com",
-    projectId: "notereactfedu-3cb48",
-    storageBucket: "notereactfedu-3cb48.appspot.com",
-    messagingSenderId: "493326734071",
-    appId: "1:493326734071:web:b5cb46db895fb172"
-};
+    apiKey: "AIzaSyAnJWbxhV3QNmF2suiCAIeH_o79wnx4CXQ",
+    authDomain: "website-trang-suc-havyb-js.firebaseapp.com",
+    databaseURL: "https://website-trang-suc-havyb-js.firebaseio.com",
+    projectId: "website-trang-suc-havyb-js",
+    storageBucket: "website-trang-suc-havyb-js.appspot.com",
+    messagingSenderId: "310761880594",
+    appId: "1:310761880594:web:cf38b27fbe3209f108accb",
+    measurementId: "G-HGSN4LVXZM"
+  };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 // var data = firebase.database();
 const dbRef = firebase.database();
 
 async function getDataAsync(name) {
-    let response = await fetch(`https://notereactfedu-3cb48.firebaseio.com/${name}.json`);
+    let response = await fetch(`https://website-trang-suc-havyb-js.firebaseio.com/${name}.json`);
     let data = await response.json()
     return data;
 }

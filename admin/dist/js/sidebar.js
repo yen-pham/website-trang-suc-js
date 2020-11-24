@@ -29,9 +29,6 @@ document.getElementById("layoutSidenav_nav").innerHTML=`
         </a>
         <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-parent="#sidenavAccordion">
             <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                <a class="nav-link collapsed" href="Login.html">
-                    Login
-                </a>
                 <a class="nav-link collapsed" href="404.html">
                     404 Page
                 </a>
