@@ -2,10 +2,12 @@ function load() {
 
 
     getDataAsync("users").then(dataUser => {
+        console.log(dataUser);
         if (dataUser) {
             //console.log(dataUser);
             var row = "";
             Object.keys(dataUser).map((e, key) => {
+                // console.log(dataUser[e].pasword);
                 row += `<tr>
                 <td>${key+1}</td>
                 <td><img style="height: 20%"  src=${dataUser[e].avata}></td>
