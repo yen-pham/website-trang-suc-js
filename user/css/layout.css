@@ -190,3 +190,24 @@ header .nav {
 .nav a {
   font-weight: 700;
 }
+
+.icon-bars{
+  display: none;
+  cursor: pointer;
+}
+.icon-close {
+  display: none;
+  cursor: pointer;
+}
+@media only screen and (max-width: 1000px) {
+  header .nav{
+    background-color: white;
+    top:0
+  }
+  .icon-bars{
+    display:block
+  }
+  .icon-close {
+    display: block;
+  }
+}

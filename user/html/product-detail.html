@@ -60,14 +60,14 @@
         <p id="pro-des">Lorem ipsum dolor sit amet, consectetur adipiscing elit, eiusmod tempor incididunt ut labore
         et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida</p>
         <ul>
-        <li>stock: <span id="pro-stock">17</span></li>
+        <!-- <li>stock: <span id="pro-stock">17</span></li> -->
   
         </ul>
         <div class="product__details__option">
         <div class="quantity">
-        <div class="pro-qty"><span class="dec qtybtn">-</span>
+        <div class="pro-qty"><span class="dec qtybtn" onclick="cartDec()">-</span>
         <input id="qty" type="text" value="2">
-        <span class="inc qtybtn">+</span></div>
+        <span class="inc qtybtn" onclick="cartPlus()">+</span></div>
         </div>
         <a class="primary-btn" onclick="addCart()">Add to cart</a>
         <button  class="heart__btn"><span class="icon_heart_alt"></span></button>

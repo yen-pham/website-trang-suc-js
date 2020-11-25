@@ -1,5 +1,6 @@
 var user=localStorage.getItem('user')?JSON.parse(localStorage.getItem('user')):null;
 var header = `<nav class="navbar navbar-expand-lg navbar-light nav">
+<span class="icon-bars" onclick="showMenu()"><i class="fa fa-bars" aria-hidden="true"></i></span>
 <div class="collapse navbar-collapse " id="navbarNav">
 <ul class="navbar-nav " id="list-nav">
     <li class="nav-item ">
@@ -22,10 +23,11 @@ var header = `<nav class="navbar navbar-expand-lg navbar-light nav">
     </li>
     ${
       user ? ` <li class="nav-item" id="user">
-      <a class="nav-link"  href="#"><h3>Hi, ${user.username}!</h3><img src=${user.avata} alt="Avatar" class="avatar">       </a>
+      <a class="nav-link"  href="profile.html"><h3>Hi, ${user.username}!</h3><img src=${user.avata} alt="Avatar" class="avatar">       </a>
     </li>` :``
     }
-
+    <li class="icon-close" onclick="hiddenMenu()"> <span ><i class="fa fa-times" aria-hidden="true"></i>
+    </span></li>
   </ul>
   
   
@@ -105,3 +107,12 @@ Copyright ©<script type="text/javascript" async="" src="https://www.google-anal
 </div>
 </footer>`
 document.getElementById("footer").innerHTML= footer;
+
+function showMenu() {
+  document.getElementById('navbarNav').style.display="block";
+  document.getElementsByClassName("icon-bars")[0].style.display="none"; 
+}
+function hiddenMenu() {
+  document.getElementById('navbarNav').style.display="none";
+  document.getElementsByClassName("icon-bars")[0].style.display="block"; 
+}

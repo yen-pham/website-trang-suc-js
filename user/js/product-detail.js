@@ -23,7 +23,7 @@ function loadProDetail () {
 })
 	document.getElementById("pro-price").innerHTML=numberWithCommas(pro.price)+" vnđ";
 	document.getElementById("pro-des").innerHTML=pro.description;
-	document.getElementById("pro-stock").innerHTML=pro.stock;
+	// document.getElementById("pro-stock").innerHTML=pro.stock;
 })
 }
 function addCart() {
@@ -59,3 +59,11 @@ function addCart() {
     alert("bạn cần đăng nhập để mua hàng!!")
     window.location="login.html";
   }}
+
+  function cartPlus() {
+document.getElementById('qty').value ++;
+  }
+  function cartDec() {
+    if(document.getElementById('qty').value>1) document.getElementById('qty').value --;
+
+  }
