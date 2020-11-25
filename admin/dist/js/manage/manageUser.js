@@ -12,7 +12,6 @@ function load() {
                 <td>${key+1}</td>
                 <td><img style="height: 20%"  src=${dataUser[e].avata}></td>
                 <td>${dataUser[e].fullname}</td>
-                <td>${dataUser[e].birthday}</td>
                 <td>${dataUser[e].address}</td>
                 <td>${dataUser[e].phone}</td>
                 <td>${dataUser[e].email}</td>

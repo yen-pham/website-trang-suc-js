@@ -10381,3 +10381,6 @@ transition: all .5s linear;
   right: 1%;
 
 }
+#dataTable_filter, #dataTable_length {
+  display: none !important;
+}
