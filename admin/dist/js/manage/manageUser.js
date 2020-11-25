@@ -2,7 +2,7 @@ function load() {
 
 
     getDataAsync("users").then(dataUser => {
-        console.log(dataUser);
+        // console.log(dataUser);
         if (dataUser) {
             //console.log(dataUser);
             var row = "";
@@ -19,7 +19,10 @@ function load() {
                 <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#userBillDetails" onclick="showBills('${e}')" >Details</button>
                 </td>
                 <td>${dataUser[e].username}</td>
-                <td>${dataUser[e].role}</td>
+                <td  >
+                <input value="${dataUser[e].role}" id="role-${e}"/>
+                <button type="button" class="btn btn-primary"  onclick="saveRole('${e}', '${dataUser[e].username}')" >Save</button>
+                </td>
                 <td>
                 <button type="button" class="btn btn-danger"  onclick="deleteUser('${e}', '${dataUser[e].fullname}')">Delete</button>
                 </td>
@@ -35,6 +38,15 @@ function load() {
 
 
 
+}
+
+function saveRole(e, name) {
+    console.log(e);
+    let roles = document.getElementById(`role-${e}`).value;
+    console.log(roles);
+    dbRef.ref('users/' + e+'/role').set(roles);
+
+    myFunction(`Change roles of ${name} successfully`);
 }
 
 function deleteUser(e, name) {
