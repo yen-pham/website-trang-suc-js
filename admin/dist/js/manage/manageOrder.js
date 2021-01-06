@@ -1,12 +1,13 @@
 function load() {
 
     getDataAsync("users").then(dataOrder => {
+        var row = "";
         if (dataOrder) {
             Object.keys(dataOrder).map(e => {
 
                 if (dataOrder[e].bills) {
                     //console.log(dataOrder[e].bills);
-                    var row = "";
+                    
                     Object.keys(dataOrder[e].bills).map((f, key) => {
 
 
